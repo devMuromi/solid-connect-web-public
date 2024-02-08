@@ -1,0 +1,27 @@
+.searchInputs {
+  margin-top: 10px;
+
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 45px 0px rgba(0, 0, 0, 0.15);
+}
+
+.searchButton {
+  height: 44px;
+  width: 100%;
+  background-color: var(--primary-1, #6f90d1);
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+
+  color: #fff;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

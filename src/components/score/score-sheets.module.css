@@ -1,0 +1,9 @@
+.container {
+  margin: 10px 22px 0 22px;
+  width: calc(100% - 44px);
+  overflow-x: auto;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
