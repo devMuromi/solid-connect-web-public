@@ -1,6 +1,6 @@
 export async function getMyData(accessToken) {
   try {
-    const backendResponse = await fetch(`${process.env.API_SERVER_URL}/my-page`, {
+    const backendResponse = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_URL}/my-page`, {
       method: "GET",
       headers: {
         Authorization: `Bearer ${accessToken}`,
@@ -30,8 +30,8 @@ export async function getMyData(accessToken) {
 
 export default async function handler(req, res) {
   const id = req.query.id;
-  const collegeData = await getCollegeDetailData(id);
+  // const collegeData = await getCollegeDetailData(id);
   if (req.method === "GET") {
-    res.status(200).json(collegeData);
+    // res.status(200).json(collegeData);
   }
 }

@@ -1,25 +1,29 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
+import createApiClient from "@/lib/clientApiClient";
+import Cookie from "js-cookie";
 
 import styles from "./my-menu.module.css";
 import Modal from "../ui/modal";
 
 export default function MyMenu() {
-  const handleLogout = () => {
-    fetch("/api/auth/logout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        if (res.status === 200) {
-          window.location.href = "/";
-        }
-      })
-      .catch((error) => {
-        console.error("로그아웃 실패", error);
-      });
+  const router = useRouter();
+  const apiClient = createApiClient();
+  const handleLogout = async () => {
+    try {
+      await apiClient.post("/auth/sign-out");
+      Cookie.remove("accessToken");
+      Cookie.remove("refreshToken");
+      // API 호출과 쿠키 제거 작업이 모두 완료된 후에 페이지 이동이 실행됩니다.
+      router.push("/");
+    } catch (error) {
+      console.error(error.toString());
+      let errorMessage = error.toString();
+      const detailedErrorMessage = error?.response?.data?.error?.message ?? "";
+      if (detailedErrorMessage) errorMessage += "\n" + detailedErrorMessage;
+      alert(errorMessage);
+    }
   };
 
   const [showLogout, setShowLogout] = useState(false);
@@ -34,11 +38,14 @@ export default function MyMenu() {
 
   return (
     <div className={styles.menu}>
-      <Link href="/my/activity/" className={styles.item}>
-        <div>활동내역</div>
-      </Link>
       <Link href="/my/favorite/" className={styles.item}>
-        <div>즐거찾기</div>
+        <div>위시학교</div>
+      </Link>
+      <Link href="/score/register/" className={styles.item}>
+        <div>공인어학/학점 변경하기</div>
+      </Link>
+      <Link href="/score/college-register/" className={styles.item}>
+        <div>지원학교 변경하기</div>
       </Link>
       <button onClick={toggleLogout} className={styles.item}>
         <div>로그아웃</div>
