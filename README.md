@@ -1,8 +1,9 @@
-솔리드 커넥션 웹
+소프트웨어 마에스트로 공개용 solid-connect-web 코드
 
-React + Next.js
+[원본 그룹](https://github.com/solid-connection)
 
-## Commands
-```bash
-npm run dev
-```
+- React
+- Next.js
+- TypeScript
+- ESLint
+- Firebase
